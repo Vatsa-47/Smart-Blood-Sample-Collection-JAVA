@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartLabTrack</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">SL</div>
+    <h1>SmartLabTrack</h1>
+    <p>Blood Sample Collection & Laboratory Management</p>
+    <label>Username</label>
+    <input id="loginUser" value="admin">
+    <label>Password</label>
+    <input id="loginPass" type="password" value="admin123">
+    <button class="primary login-btn" onclick="login()">Sign In</button>
+    <small>Demo: admin / admin123</small>
+  </div>
+</div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo"><span>SL</span><i>◆</i></div>
+      <div><b>SmartLabTrack</b><small>Laboratory Management System</small></div>
+    </div>
+    <div class="brand-tagline">TRACK. &nbsp; TEST. &nbsp; TRUST.</div>
+    <nav>
+      <div class="nav-group">MAIN</div>
+      <button class="nav active" data-page="dashboard"><span class="nav-icon blue-icon">⌂</span><span><b>Dashboard</b><small>Overview & Insights</small></span><em>›</em></button>
+
+      <div class="nav-group">SAMPLE MANAGEMENT</div>
+      <button class="nav" data-page="collections"><span class="nav-icon teal-icon">⌂</span><span><b>Home Collections</b><small>Manage home sample collection</small></span><em>›</em></button>
+      <button class="nav" data-page="patients"><span class="nav-icon blue-icon">♙</span><span><b>Patients</b><small>Patient registration & records</small></span><em>›</em></button>
+      <button class="nav" data-page="samples"><span class="nav-icon red-icon">▣</span><span><b>Samples</b><small>Sample registration & status</small></span><span class="count red-count">3</span><em>›</em></button>
+      <button class="nav" data-page="tracking"><span class="nav-icon purple-icon">⌁</span><span><b>Tracking</b><small>Sample journey & timeline</small></span><em>›</em></button>
+      <button class="nav" data-page="tests"><span class="nav-icon orange-icon">▤</span><span><b>Tests & Results</b><small>Manage tests and enter results</small></span><span class="count blue-count">5</span><em>›</em></button>
+
+      <div class="nav-group">OPERATIONS</div>
+      <button class="nav" data-page="alerts"><span class="nav-icon red-icon">●</span><span><b>Alerts</b><small>Delays, rejections & notifications</small></span><span class="count red-count">2</span><em>›</em></button>
+      <button class="nav" data-page="storage"><span class="nav-icon teal-icon">▰</span><span><b>Storage</b><small>Sample storage management</small></span><em>›</em></button>
+
+      <div class="nav-group">ANALYTICS</div>
+      <button class="nav" data-page="reports"><span class="nav-icon purple-icon">▥</span><span><b>Reports</b><small>Reports & analytics</small></span><em>›</em></button>
+    </nav>
+    <div class="userbox">
+  <div class="profile-main">
+    <div class="avatar">AD</div>
+    <div class="user-info">
+      <b id="sidebarUser">Admin User</b>
+      <small id="sidebarRole">Administrator</small>
+      <span class="online"><i></i> Online</span>
+    </div>
+  </div>
+  <button class="switch-role-btn" onclick="toggleRoleMenu()"><span>⇄</span> Switch Demo Role</button>
+  <div class="role-menu" id="roleMenu">
+    <div class="role-menu-title">SWITCH DEMO USER</div>
+    <button onclick="switchRole('ADMIN','Admin User','Administrator')">Admin User <span>ADMIN</span></button>
+    <button onclick="switchRole('COLLECTOR','Ravi Kumar','Home Collector')">Ravi Kumar <span>COLLECTOR</span></button>
+    <button onclick="switchRole('LAB_TECHNICIAN','Lab Technician','Laboratory Technician')">Lab Technician <span>LAB TECH</span></button>
+    <button onclick="switchRole('VERIFIER','Dr. Priya Shah','Result Verifier')">Dr. Priya Shah <span>VERIFIER</span></button>
+  </div>
+</div>
+    <button class="logout" onclick="logout()">⇥ &nbsp; Logout</button>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><h1 id="pageTitle">Dashboard</h1><p id="pageSub">Overview of today's laboratory workflow</p></div>
+      <div class="top-actions"><div class="global-search"><span>⌕</span><input id="globalSearch" placeholder="Search sample or patient..." onkeydown="if(event.key==='Enter')globalSearch()"></div><span class="date" id="today"></span><button class="icon-btn" onclick="toggleNotifications()">🔔<span class="bell-dot">2</span></button><button class="outline" onclick="showPage('collections')">+ Home Collection</button><button class="profile-btn" onclick="toast('Signed in as Admin User')">A</button></div>
+    </header>
+    <section id="content"></section>
+  </main>
+</div>
+<div class="notification-drawer" id="notificationDrawer">
+  <div class="drawer-head"><b>Notifications</b><button onclick="toggleNotifications()">×</button></div>
+  <div class="drawer-item danger"><b>BS202600019 delayed</b><small>Testing exceeded 60 minutes.</small></div>
+  <div class="drawer-item"><b>Recollection required</b><small>BS202600016 — insufficient volume.</small></div>
+  <div class="drawer-item info"><b>1 result awaiting verification</b><small>BS202600021 — CBC.</small></div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-head"><h2 id="modalTitle">New</h2><button onclick="closeModal()">×</button></div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
